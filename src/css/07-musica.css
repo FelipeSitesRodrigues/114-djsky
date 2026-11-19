@@ -84,8 +84,13 @@
 .lancamentos__lista a:hover .lancamentos__play { background: var(--magenta); border-color: transparent; }
 .lancamentos__lista a.ativa .lancamentos__play { background: var(--magenta); border-color: transparent; }
 .lancamentos__lista a.ativa .lancamentos__nome strong { color: var(--magenta-claro); }
-.lancamentos__player { margin-top: 16px; height: 80px; border-radius: 12px; overflow: hidden; background: rgb(255 255 255 / .04); }
-.lancamentos__player iframe { display: block; width: 100%; height: 80px; border: 0; }
+.lancamentos__sub { margin: 22px 0 10px; }
+.lancamentos__lista--yt { flex: none; }
+.lancamentos__lista--yt .lancamentos__n { font-size: 22px; color: #FF3D3D; line-height: 0; }
+.lancamentos__player { margin-top: 16px; border-radius: 12px; overflow: hidden; background: rgb(255 255 255 / .04); }
+/* a API do Spotify troca a div pelo iframe com width/height próprios: a largura vem daqui */
+.lancamentos__player iframe { display: block; width: 100% !important; height: 80px; border: 0; }
+.lancamentos__player iframe.yt { height: auto; aspect-ratio: 16 / 9; }
 .lancamentos__redes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
 .lancamentos__redes .pilula { letter-spacing: .04em; text-transform: none; font-size: 13px; min-height: 40px; transition: background-color .3s var(--ease-hover), border-color .3s; }
 .lancamentos__redes .pilula .i { font-size: 17px; }

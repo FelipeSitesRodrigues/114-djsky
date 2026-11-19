@@ -34,21 +34,71 @@
 })()
 
 ;
-// Lançamentos: o clique abre o player oficial do Spotify dentro do card (prévia de 30 s pra
-// quem não está logado, música inteira pra quem está). O iframe só nasce no clique; sem JS, o
-// link abre a faixa no Spotify.
+// Lançamentos: um clique no play do site já toca. Spotify pela API oficial do iframe
+// (createController + play), que só baixa no 1º clique; prévia de 30 s pra quem não está
+// logado. YouTube pelo domínio sem cookie, com autoplay. Cada um tem a sua caixa: o player do
+// Spotify fica vivo e só troca a faixa (loadUri). Sem JS, o link abre a faixa no app.
 ;(() => {
-  const caixa = document.querySelector('[data-spotify-player]')
-  if (!caixa) return
-  const links = document.querySelectorAll('[data-spotify]')
+  const caixaSp = document.querySelector('[data-spotify-player]')
+  const caixaYt = document.querySelector('[data-youtube-player]')
+  if (!caixaSp || !caixaYt) return
+  const links = document.querySelectorAll('[data-spotify], [data-youtube]')
+  let ctrl = null
+  let pedido = false
+  let pendente = ''
+  const tocarSpotify = (id) => {
+    const uri = `spotify:track:${id}`
+    if (ctrl) {
+      ctrl.loadUri(uri)
+      ctrl.play()
+      return
+    }
+    pendente = uri
+    if (pedido) return
+    pedido = true
+    window.onSpotifyIframeApiReady = (api) => {
+      const criadoCom = pendente
+      api.createController(caixaSp.querySelector('[data-spotify-alvo]'), { uri: criadoCom, width: '100%', height: 80, theme: 'dark' }, (c) => {
+        ctrl = c
+        let primeira = true
+        c.addListener('ready', () => {
+          if (!primeira) return
+          primeira = false
+          // clicou noutra faixa enquanto a API carregava: vale a última
+          if (pendente !== criadoCom) c.loadUri(pendente)
+          c.play()
+        })
+      })
+    }
+    const sc = document.createElement('script')
+    sc.src = 'https://open.spotify.com/embed/iframe-api/v1'
+    sc.async = true
+    document.head.append(sc)
+  }
   links.forEach((a) =>
     a.addEventListener('click', (e) => {
       e.preventDefault()
+      // 2º clique na faixa que já está no player do Spotify: pausa ou volta a tocar
+      if (a.dataset.spotify && a.classList.contains('ativa') && ctrl) {
+        ctrl.togglePlay()
+        return
+      }
       links.forEach((l) => l.classList.toggle('ativa', l === a))
-      // pausa o cartão de áudio do site, pra não tocarem os dois
-      document.querySelectorAll('[data-faixa] audio').forEach((au) => au.pause())
-      caixa.hidden = false
-      caixa.innerHTML = `<iframe src="https://open.spotify.com/embed/track/${a.dataset.spotify}?utm_source=generator&theme=0" title="Player do Spotify: ${a.querySelector('strong').textContent}" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="eager"></iframe>`
+      // pausa o áudio e os vídeos com som do site, pra não tocarem dois ao mesmo tempo
+      document.querySelectorAll('[data-faixa] audio').forEach((m) => m.pause())
+      document.querySelectorAll('.vcard video').forEach((v) => { if (!v.muted) v.pause() })
+      const yt = a.dataset.youtube
+      if (yt) {
+        if (ctrl) ctrl.pause()
+        caixaSp.hidden = true
+        caixaYt.hidden = false
+        caixaYt.innerHTML = `<iframe class="yt" src="https://www.youtube-nocookie.com/embed/${yt}?autoplay=1&rel=0&playsinline=1" title="YouTube: ${a.querySelector('strong').textContent}" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe>`
+      } else {
+        caixaYt.hidden = true
+        caixaYt.replaceChildren()
+        caixaSp.hidden = false
+        tocarSpotify(a.dataset.spotify)
+      }
     }),
   )
 })()

@@ -39,8 +39,14 @@
               <li><a href="https://open.spotify.com/track/4yDuLeBt2oQY9aHjZq2KDN" target="_blank" rel="noopener" data-spotify="4yDuLeBt2oQY9aHjZq2KDN" aria-label="Ouvir Fazendo Amor no Spotify"><span class="lancamentos__n">03</span><span class="lancamentos__nome"><strong>Fazendo Amor</strong>Sky, Lee Magnatta</span><span class="lancamentos__play"><i data-i="play" data-w="fill"></i></span></a></li>
               <li><a href="https://open.spotify.com/track/76wOEkUDNXNEcQNwSfAV5i" target="_blank" rel="noopener" data-spotify="76wOEkUDNXNEcQNwSfAV5i" aria-label="Ouvir Pode Vir no Spotify"><span class="lancamentos__n">04</span><span class="lancamentos__nome"><strong>Pode Vir</strong>Sky, Bruninho Top7</span><span class="lancamentos__play"><i data-i="play" data-w="fill"></i></span></a></li>
             </ol>
-            <!-- player do Spotify: o iframe só entra no 1º clique (pesa ~1 MB e derrubaria o PageSpeed) -->
-            <div class="lancamentos__player" data-spotify-player hidden></div>
+            <h4 class="rotulo lancamentos__sub">No YouTube</h4>
+            <ol class="lancamentos__lista lancamentos__lista--yt">
+              <li><a href="https://www.youtube.com/watch?v=7_wRo9zkiyM" target="_blank" rel="noopener" data-youtube="7_wRo9zkiyM" aria-label="Assistir Rebola Vai Malandra no YouTube"><span class="lancamentos__n"><i data-i="youtube-logo" data-w="fill"></i></span><span class="lancamentos__nome"><strong>Rebola Vai Malandra</strong>Clipe oficial</span><span class="lancamentos__play"><i data-i="play" data-w="fill"></i></span></a></li>
+              <li><a href="https://www.youtube.com/watch?v=t4Xw93NCmjo" target="_blank" rel="noopener" data-youtube="t4Xw93NCmjo" aria-label="Assistir Sky x Pré-Caju no YouTube"><span class="lancamentos__n"><i data-i="youtube-logo" data-w="fill"></i></span><span class="lancamentos__nome"><strong>Sky x Pré-Caju</strong>Funk Nostalgia, audiovisual oficial</span><span class="lancamentos__play"><i data-i="play" data-w="fill"></i></span></a></li>
+            </ol>
+            <!-- player do Spotify ou do YouTube: o iframe só entra no 1º clique (cada um pesa ~1 MB e derrubaria o PageSpeed) -->
+            <div class="lancamentos__player" data-spotify-player hidden><div data-spotify-alvo></div></div>
+            <div class="lancamentos__player" data-youtube-player hidden></div>
             <div class="lancamentos__redes">
               <a class="pilula" href="{{cfg.redes.spotify}}" target="_blank" rel="noopener"><i data-i="spotify-logo" data-w="fill"></i>Spotify</a>
               <a class="pilula" href="{{cfg.redes.youtube}}" target="_blank" rel="noopener"><i data-i="youtube-logo" data-w="fill"></i>YouTube</a>
