@@ -34,10 +34,13 @@
           <div class="lancamentos" data-revela="grade" style="--i:2">
             <h3 class="rotulo">Lançamentos</h3>
             <ol class="lancamentos__lista">
-              <li><a href="{{cfg.redes.spotify}}" target="_blank" rel="noopener"><span class="lancamentos__n">01</span><span class="lancamentos__nome"><strong>Funk 2023</strong>Sky</span><span class="lancamentos__play"><i data-i="play" data-w="fill"></i></span></a></li>
-              <li><a href="{{cfg.redes.spotify}}" target="_blank" rel="noopener"><span class="lancamentos__n">02</span><span class="lancamentos__nome"><strong>Pernoite</strong>Sky, Lee Magnatta</span><span class="lancamentos__play"><i data-i="play" data-w="fill"></i></span></a></li>
-              <li><a href="{{cfg.redes.spotify}}" target="_blank" rel="noopener"><span class="lancamentos__n">03</span><span class="lancamentos__nome"><strong>A Primeira Vez</strong>Sky</span><span class="lancamentos__play"><i data-i="play" data-w="fill"></i></span></a></li>
+              <li><a href="https://open.spotify.com/track/5jEl3kqY4JdLJ3yb9mnWoo" target="_blank" rel="noopener" data-spotify="5jEl3kqY4JdLJ3yb9mnWoo" aria-label="Ouvir Rebola Vai Malandra no Spotify"><span class="lancamentos__n">01</span><span class="lancamentos__nome"><strong>Rebola Vai Malandra</strong>Lee Magnatta, Sky</span><span class="lancamentos__play"><i data-i="play" data-w="fill"></i></span></a></li>
+              <li><a href="https://open.spotify.com/track/3iLt057jH9fjQaNlKxUCp4" target="_blank" rel="noopener" data-spotify="3iLt057jH9fjQaNlKxUCp4" aria-label="Ouvir Chacoalha no Spotify"><span class="lancamentos__n">02</span><span class="lancamentos__nome"><strong>Chacoalha</strong>Sky, MC Fiel DK</span><span class="lancamentos__play"><i data-i="play" data-w="fill"></i></span></a></li>
+              <li><a href="https://open.spotify.com/track/4yDuLeBt2oQY9aHjZq2KDN" target="_blank" rel="noopener" data-spotify="4yDuLeBt2oQY9aHjZq2KDN" aria-label="Ouvir Fazendo Amor no Spotify"><span class="lancamentos__n">03</span><span class="lancamentos__nome"><strong>Fazendo Amor</strong>Sky, Lee Magnatta</span><span class="lancamentos__play"><i data-i="play" data-w="fill"></i></span></a></li>
+              <li><a href="https://open.spotify.com/track/76wOEkUDNXNEcQNwSfAV5i" target="_blank" rel="noopener" data-spotify="76wOEkUDNXNEcQNwSfAV5i" aria-label="Ouvir Pode Vir no Spotify"><span class="lancamentos__n">04</span><span class="lancamentos__nome"><strong>Pode Vir</strong>Sky, Bruninho Top7</span><span class="lancamentos__play"><i data-i="play" data-w="fill"></i></span></a></li>
             </ol>
+            <!-- player do Spotify: o iframe só entra no 1º clique (pesa ~1 MB e derrubaria o PageSpeed) -->
+            <div class="lancamentos__player" data-spotify-player hidden></div>
             <div class="lancamentos__redes">
               <a class="pilula" href="{{cfg.redes.spotify}}" target="_blank" rel="noopener"><i data-i="spotify-logo" data-w="fill"></i>Spotify</a>
               <a class="pilula" href="{{cfg.redes.youtube}}" target="_blank" rel="noopener"><i data-i="youtube-logo" data-w="fill"></i>YouTube</a>

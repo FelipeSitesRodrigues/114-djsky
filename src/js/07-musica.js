@@ -32,3 +32,23 @@
     })
   }
 })()
+
+;
+// Lançamentos: o clique abre o player oficial do Spotify dentro do card (prévia de 30 s pra
+// quem não está logado, música inteira pra quem está). O iframe só nasce no clique; sem JS, o
+// link abre a faixa no Spotify.
+;(() => {
+  const caixa = document.querySelector('[data-spotify-player]')
+  if (!caixa) return
+  const links = document.querySelectorAll('[data-spotify]')
+  links.forEach((a) =>
+    a.addEventListener('click', (e) => {
+      e.preventDefault()
+      links.forEach((l) => l.classList.toggle('ativa', l === a))
+      // pausa o cartão de áudio do site, pra não tocarem os dois
+      document.querySelectorAll('[data-faixa] audio').forEach((au) => au.pause())
+      caixa.hidden = false
+      caixa.innerHTML = `<iframe src="https://open.spotify.com/embed/track/${a.dataset.spotify}?utm_source=generator&theme=0" title="Player do Spotify: ${a.querySelector('strong').textContent}" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="eager"></iframe>`
+    }),
+  )
+})()

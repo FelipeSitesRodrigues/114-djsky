@@ -1,7 +1,11 @@
 [
   { "id": "reveillon", "titulo": "Réveillon 2022", "sub": "Aftermovie", "tempo": "1:00", "w": 1080, "h": 1920 },
+  { "id": "casamento", "titulo": "Casamento", "sub": "Aftermovie", "tempo": "1:00", "w": 1920, "h": 1080 },
   { "id": "blackout", "titulo": "Blackout", "sub": "Aftermovie", "tempo": "0:24", "w": 1080, "h": 1920 },
-  { "id": "rebola", "titulo": "Rebola Vai Malandra", "sub": "Clipe oficial", "tempo": "2:04", "w": 1920, "h": 1080 },
   { "id": "quinze-anos", "titulo": "15 anos", "sub": "Festa particular", "tempo": "1:04", "w": 1920, "h": 1080 },
+  { "id": "festival", "titulo": "Desmantelo", "sub": "Festival", "tempo": "1:01", "w": 1920, "h": 1080 },
+  { "id": "grandes-eventos", "titulo": "Hallow", "sub": "Grande evento", "tempo": "0:49", "w": 1920, "h": 1080 },
+  { "id": "quinze-anos-2", "titulo": "15 anos", "sub": "Aftermovie", "tempo": "1:24", "w": 1920, "h": 1080 },
+  { "id": "rebola", "titulo": "Rebola Vai Malandra", "sub": "Clipe oficial", "tempo": "2:04", "w": 1920, "h": 1080 },
   { "id": "formatura", "titulo": "Formatura", "sub": "Aftermovie", "tempo": "0:46", "w": 1080, "h": 1920 }
 ]
