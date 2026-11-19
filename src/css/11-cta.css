@@ -1,0 +1,36 @@
+/* ---------------------------------------------------------------- CTA final
+   Vídeo da festa de 15 anos no fundo, em opacidade baixa (pedido do Felipe), com a luz violeta
+   e magenta subindo da base.                                                                 */
+.cta { position: relative; padding: 120px 0 110px; overflow: clip; isolation: isolate; text-align: center; border-top: 1px solid var(--linha); }
+.cta__video { position: absolute; inset: 0; z-index: -2; }
+.cta__video video { width: 100%; height: 100%; object-fit: cover; opacity: .2; filter: saturate(.9); }
+.cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(70% 60% at 50% 115%, rgb(231 34 132 / .38), transparent 70%),
+    radial-gradient(50% 50% at 15% 110%, rgb(91 56 150 / .5), transparent 70%),
+    radial-gradient(50% 50% at 85% 110%, rgb(91 56 150 / .5), transparent 70%),
+    linear-gradient(var(--noite), rgb(8 7 11 / .55) 30%, rgb(8 7 11 / .7));
+}
+.cta__miolo { display: grid; justify-items: center; }
+.cta__logo { width: 250px; height: auto; margin-bottom: 26px; filter: drop-shadow(0 0 30px rgb(231 34 132 / .35)); }
+.cta__titulo { font-size: 66px; line-height: .98; text-transform: uppercase; }
+.cta__sub { margin-top: 20px; font-size: 18px; color: var(--texto); }
+.cta__acoes { display: flex; align-items: center; justify-content: center; gap: 28px; margin-top: 34px; }
+.cta__acoes .botao { min-height: 60px; padding: 0 36px; font-size: 14px; }
+.cta__tel { font-family: var(--fonte-display); font-stretch: 112%; font-weight: 700; font-size: 22px; padding-left: 28px; border-left: 1px solid var(--linha-2); transition: color .3s var(--ease-hover); }
+.cta__tel:hover { color: var(--magenta-claro); }
+.cta__linha { margin-top: 34px; font-size: 12px; color: var(--texto); }
+@media (max-width: 47.99em) {
+  .cta { padding: 84PX 0 80PX; }
+  .cta__logo { width: 170PX; }
+  .cta__titulo { font-size: clamp(32PX, 10vw, 42PX); }
+  .cta__sub { font-size: 15.5PX; }
+  .cta__acoes { flex-direction: column; gap: 16PX; width: 100%; }
+  .cta__acoes .botao { width: 100%; }
+  .cta__tel { border: 0; padding: 0; font-size: 19PX; }
+  .cta__linha { font-size: 10PX; }
+}

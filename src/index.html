@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!-- @preload -->
+  <link rel="preload" href="/assets/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+  <script>
+    // js liga as animações de entrada (sem JS tudo aparece no lugar)
+    document.documentElement.classList.add('js')
+    // abertura com o logo: uma vez por visita e nunca pra quem pediu menos movimento.
+    // ?abertura no endereço força (pra revisar sem abrir aba anônima)
+    try {
+      var forcar = /[?&]abertura(=|&|$)/.test(location.search)
+      if ((forcar || !sessionStorage.getItem('sky-abertura')) && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('abre')
+        sessionStorage.setItem('sky-abertura', '1')
+      }
+    } catch (e) {}
+  </script>
+  <title>Sky | DJ open format em Aracaju para shows e eventos</title>
+  <meta name="description" content="DJ Sky: drops próprios, versões inéditas e show com visual de telão. Já tocou em 8 estados. Contrate para casa noturna, festival, casamento, formatura e 15 anos.">
+  <!-- @robots -->
+  <meta name="theme-color" content="#08070B">
+  <meta name="format-detection" content="telephone=no">
+  <!-- @meta-dominio -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Sky">
+  <meta property="og:title" content="Sky | O melhor DJ do Nordeste">
+  <meta property="og:description" content="DJ open format e produtor musical de Aracaju. Drops próprios, versões inéditas e show com visual de telão. Agenda aberta em todo o Brasil.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="DJ Sky de óculos escuros segurando a gola da jaqueta, com luz magenta e violeta">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <!-- @css -->
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- abertura (modelo da 0105 Ston e da 0104 Lume): o logo entra em 5 peças sobre um trecho do
+       show do Sky em opacidade baixa, o fio de luz acende e a tela sobe com a borda curva,
+       revelando o hero. ~1,85 s, só transform e opacity (97-abertura) -->
+  <div class="abertura" aria-hidden="true" data-abertura>
+    <video class="abertura__video" muted playsinline loop preload="none" data-src="/assets/video/abertura.mp4" width="854" height="364"></video>
+    <div class="abertura__marca">
+      <div class="abertura__logo">
+        <img class="abertura__p abertura__p--s" data-src="/assets/img/abre-s.webp" alt="" width="218" height="204">
+        <img class="abertura__p abertura__p--k" data-src="/assets/img/abre-k.webp" alt="" width="261" height="298">
+        <img class="abertura__p abertura__p--y" data-src="/assets/img/abre-y.webp" alt="" width="244" height="288">
+        <img class="abertura__p abertura__p--o1" data-src="/assets/img/abre-onda1.webp" alt="" width="280" height="104">
+        <img class="abertura__p abertura__p--o2" data-src="/assets/img/abre-onda2.webp" alt="" width="287" height="104">
+      </div>
+      <span class="abertura__fio"></span>
+      <p class="abertura__sub"><span>DJ e produtor musical</span></p>
+    </div>
+  </div>
+  <script>
+    // só baixa as peças e o vídeo da abertura quando ela vai mesmo rodar
+    if (document.documentElement.classList.contains('abre')) {
+      document.querySelectorAll('[data-abertura] [data-src]').forEach(function (el) { el.src = el.getAttribute('data-src') })
+      var av = document.querySelector('.abertura__video')
+      if (av && av.play) av.play().catch(function () {})
+    }
+  </script>
+
+  <!-- @parcial 00-header -->
+
+  <main id="conteudo">
+    <!-- @parcial 01-hero -->
+    <!-- @parcial 02-prova -->
+    <!-- @parcial 03-videos -->
+    <!-- @parcial 04-sobre -->
+    <!-- @parcial 05-palcos -->
+    <!-- @parcial 06-palco-com -->
+    <!-- @parcial 07-musica -->
+    <!-- @parcial 08-formatos -->
+    <!-- @parcial 09-show -->
+    <!-- @parcial 09b-galeria -->
+    <!-- @parcial 10-contratar -->
+    <!-- @parcial 11-cta -->
+  </main>
+
+  <!-- @parcial 12-rodape -->
+  <!-- @parcial 13-player -->
+
+  <!-- @sprite -->
+  <!-- @schema -->
+  <!-- @js -->
+</body>
+</html>

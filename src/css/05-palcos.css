@@ -1,0 +1,33 @@
+/* ---------------------------------------------------------------- palcos (galeria bento)
+   Linha 1: grande (2/3) + vertical (1/3). Linha 2: três iguais. Linha 3: faixa panorâmica.   */
+.palcos__grade {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: 136px;
+  gap: 14px;
+}
+.palco {
+  position: relative;
+  grid-column: span 2;
+  grid-row: span 2;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid var(--linha-2);
+  background: var(--card);
+  transition: border-color .5s var(--ease), box-shadow .5s var(--ease);
+}
+.palco--a { grid-column: span 4; grid-row: span 3; }
+.palco--b { grid-row: span 3; }
+.palco--faixa { grid-column: span 6; grid-row: span 2; }
+.palco picture, .palco img { width: 100%; height: 100%; }
+.palco img { object-fit: cover; transition: transform 1.2s var(--ease); }
+.palco:hover { border-color: rgb(255 120 190 / .6); box-shadow: 0 0 0 1px rgb(231 34 132 / .3), 0 18px 50px -20px rgb(231 34 132 / .45); }
+.palco:hover img { transform: scale(1.04); }
+.palco figcaption { position: absolute; left: 16px; bottom: 16px; min-height: 30px; padding: 0 14px; font-size: 10.5px; }
+@media (max-width: 47.99em) {
+  .palcos__grade { grid-template-columns: 1fr 1fr; grid-auto-rows: 120PX; gap: 10PX; }
+  .palco, .palco--b { grid-column: span 1; grid-row: span 2; }
+  .palco--a, .palco--faixa { grid-column: span 2; grid-row: span 2; }
+  .palco { border-radius: 18PX; }
+  .palco figcaption { left: 10PX; bottom: 10PX; font-size: 9.5PX; padding: 0 10PX; min-height: 26PX; }
+}

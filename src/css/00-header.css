@@ -1,0 +1,95 @@
+/* ---------------------------------------------------------------- topo
+   Transparente sobre o hero; depois da 1ª dobra ganha o vidro escuro (classe .topo--vidro). */
+.topo {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 100;
+  transition: background-color .5s var(--ease), border-color .5s var(--ease), transform .5s var(--ease);
+  border-bottom: 1px solid transparent;
+}
+.topo--vidro {
+  background: rgb(8 7 11 / .72);
+  border-bottom-color: var(--linha);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(16px) saturate(140%);
+}
+.topo__caixa {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  width: min(100% - 64PX, 1360px);
+  height: 84px;
+  margin-inline: auto;
+  transition: height .5s var(--ease);
+}
+.topo--vidro .topo__caixa { height: 70px; }
+.topo__marca img { width: 96px; height: auto; transition: width .5s var(--ease); }
+.topo--vidro .topo__marca img { width: 80px; }
+.topo__menu { display: flex; gap: 40px; }
+.topo__menu a {
+  position: relative;
+  font-family: var(--fonte-display);
+  font-stretch: 112%;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgb(245 243 247 / .82);
+  padding: 8px 0;
+  transition: color .3s var(--ease-hover);
+}
+.topo__menu a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 2px;
+  height: 1px;
+  background: var(--magenta);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform .45s var(--ease);
+}
+.topo__menu a:hover { color: #fff; }
+.topo__menu a:hover::after { transform: scaleX(1); transform-origin: left; }
+.topo__abrir { display: none; }
+.topo__gaveta { display: none; }
+
+@media (max-width: 61.99em) {
+  .topo__menu, .topo__cta { display: none; }
+  .topo__caixa { width: min(100% - 36PX, 1360px); height: 68PX; }
+  .topo--vidro .topo__caixa { height: 62PX; }
+  .topo__marca img, .topo--vidro .topo__marca img { width: 74PX; }
+  .topo__abrir {
+    display: grid;
+    place-content: center;
+    gap: 6PX;
+    width: 46PX;
+    height: 46PX;
+    border-radius: 50%;
+    border: 1px solid rgb(255 255 255 / .18);
+    background: rgb(255 255 255 / .06);
+  }
+  .topo__abrir span { display: block; width: 18PX; height: 1.5PX; background: #fff; border-radius: 2px; transition: transform .4s var(--ease); }
+  .topo--aberto .topo__abrir span:first-child { transform: translateY(3.75PX) rotate(45deg); }
+  .topo--aberto .topo__abrir span:last-child { transform: translateY(-3.75PX) rotate(-45deg); }
+  .topo--aberto { background: rgb(8 7 11 / .96); }
+  .topo__gaveta:not([hidden]) {
+    display: grid;
+    gap: 28PX;
+    padding: 12PX 18PX 28PX;
+    animation: gaveta .5s var(--ease) both;
+  }
+  .topo__gaveta nav { display: grid; }
+  .topo__gaveta nav a {
+    padding: 14PX 0;
+    border-bottom: 1px solid var(--linha);
+    font-family: var(--fonte-display);
+    font-stretch: 125%;
+    font-weight: 700;
+    font-size: 22PX;
+    text-transform: uppercase;
+  }
+  @keyframes gaveta { from { opacity: 0; transform: translateY(-10PX); } }
+}

@@ -1,0 +1,81 @@
+/* ---------------------------------------------------------------- abertura
+   Modelo da 0105 Ston e da 0104 Lume. Fundo preto com um trecho do show do Sky (cabine com as
+   colunas SKY, o verde girado pro magenta no ffmpeg) em opacidade baixa; o logo entra em 5
+   peças: o s sobe, o k desce, o y sobe e as duas ondas deslizam de lados opostos. O fio
+   magenta acende, "DJ e produtor musical" sobe e a tela inteira sai pra cima com a borda de
+   baixo curva, revelando o hero. Linha do tempo: 0 a 1 s logo · 0,55 a 1,1 s fio e linha
+   · 1,25 a 1,85 s saída (mais curta que isso o vídeo nem aparece; mais longa pesa no Speed Index). O hero entra a partir de --abre. Só transform e opacity. Uma vez por
+   visita (classe .abre no html); sem JS ou com movimento reduzido, não aparece.             */
+:root { --abre: 0s; }
+.abre { --abre: 1.4s; }
+.abertura { display: none; }
+.abre .abertura {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  background: var(--noite);
+  pointer-events: none;
+  animation: abertura-sai .6s cubic-bezier(.76, 0, .24, 1) 1.25s both;
+}
+/* a borda curva: meia-lua do preto presa embaixo da tela, que sobe junto */
+.abre .abertura::after { content: ''; position: absolute; left: -10%; right: -10%; top: calc(100% - 1px); height: 14vh; border-radius: 0 0 50% 50%; background: var(--noite); }
+.abertura__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; animation: abertura-video .6s ease .05s forwards; }
+@keyframes abertura-video { to { opacity: .26; } }
+/* película: escurece o centro pro logo e põe a luz violeta da marca embaixo */
+.abre .abertura::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(50% 45% at 50% 50%, rgb(8 7 11 / .55), rgb(8 7 11 / .2) 70%), radial-gradient(70% 50% at 50% 110%, rgb(91 56 150 / .5), transparent 70%);
+}
+.abertura__marca { position: relative; z-index: 2; display: grid; justify-items: center; gap: 26px; animation: abertura-marca .35s ease-in 1.2s both; }
+.abertura__logo { position: relative; width: min(360PX, 70vw); aspect-ratio: 4254 / 2460; }
+.abertura__p { position: absolute; height: auto; max-width: none; }
+/* posição de cada peça no logo recortado de 4254x2460 */
+.abertura__p--s { left: 0; top: 25.16%; width: 30.28%; animation: abertura-sobe .6s cubic-bezier(.22, 1, .36, 1) .04s both; }
+.abertura__p--k { left: 30.3%; top: 2.56%; width: 36.25%; animation: abertura-desce .6s cubic-bezier(.22, 1, .36, 1) .12s both; }
+.abertura__p--y { left: 66.13%; top: 25.85%; width: 33.87%; animation: abertura-sobe .6s cubic-bezier(.22, 1, .36, 1) .2s both; }
+.abertura__p--o1 { left: 50.42%; top: 0; width: 38.95%; animation: abertura-direita .6s cubic-bezier(.22, 1, .36, 1) .34s both; }
+.abertura__p--o2 { left: 38.13%; top: 74.92%; width: 39.84%; animation: abertura-esquerda .6s cubic-bezier(.22, 1, .36, 1) .4s both; }
+.abertura__fio {
+  width: 140PX;
+  height: 2PX;
+  border-radius: 2PX;
+  background: linear-gradient(90deg, rgb(231 34 132 / .1), var(--magenta-claro), rgb(231 34 132 / .1));
+  box-shadow: 0 0 16px 1px rgb(231 34 132 / .8);
+  animation: abertura-fio .5s cubic-bezier(.22, 1, .36, 1) .55s both;
+}
+.abertura__sub {
+  font-family: var(--fonte-display);
+  font-stretch: 125%;
+  font-weight: 600;
+  font-size: 12PX;
+  letter-spacing: .44em;
+  text-transform: uppercase;
+  color: rgb(245 243 247 / .8);
+  margin-top: -8PX;
+  overflow: clip;
+}
+/* sobe de dentro da máscara, sem opacidade: é o 1º texto pintado (FCP), não pode nascer
+   transparente nem atrasado */
+.abertura__sub span { display: block; animation: abertura-linha .9s cubic-bezier(.22, 1, .36, 1) both; }
+@keyframes abertura-sobe { from { opacity: 0; transform: translate3d(0, 38%, 0); } }
+@keyframes abertura-desce { from { opacity: 0; transform: translate3d(0, -38%, 0); } }
+@keyframes abertura-direita { from { opacity: 0; transform: translate3d(28%, 0, 0); } }
+@keyframes abertura-esquerda { from { opacity: 0; transform: translate3d(-28%, 0, 0); } }
+@keyframes abertura-linha { from { transform: translate3d(0, 75%, 0); } }
+@keyframes abertura-fio { from { opacity: 0; transform: scaleX(0); } }
+@keyframes abertura-marca { to { opacity: 0; transform: translate3d(0, -28px, 0) scale(.96); } }
+@keyframes abertura-sai { to { transform: translate3d(0, calc(-100% - 15vh), 0); } }
+.abre .abertura.acabou { display: none; }
+
+/* o título do hero espera a tela sair (o resto do hero já soma --abre no --atraso do HTML) */
+.hero__titulo { --atraso: calc(var(--abre) + .2s); }
+
+@media (prefers-reduced-motion: reduce) {
+  .abre .abertura { display: none; }
+  .abre { --abre: 0s; }
+}

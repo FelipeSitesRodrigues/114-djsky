@@ -1,0 +1,35 @@
+    <section class="secao videos secao--sem-fio" id="videos" aria-labelledby="videos-titulo">
+      <div class="caixa">
+        <header class="cabeca cabeca--centro">
+          <span class="rotulo" data-revela>01 / Vídeos</span>
+          <h2 class="titulo" id="videos-titulo" data-palavras data-revela="palavras">Melhor <span class="tarja m">ver</span> do que ler.</h2>
+          <p class="cabeca__sub" data-revela style="--atraso:.2s">Aperte o play. É assim que a pista fica.</p>
+        </header>
+
+        <div class="carrossel" data-carrossel data-revela="zoom" style="--atraso:.15s">
+          <div class="carrossel__trilho" aria-roledescription="carrossel" aria-label="Vídeos do Sky">
+            <!-- @gerar videos -->
+          </div>
+          <button type="button" class="carrossel__seta carrossel__seta--esq" data-anterior aria-label="Vídeo anterior"><i data-i="caret-left" data-w="bold"></i></button>
+          <button type="button" class="carrossel__seta carrossel__seta--dir" data-proximo aria-label="Próximo vídeo"><i data-i="caret-right" data-w="bold"></i></button>
+        </div>
+
+        <div class="player-barra" data-revela style="--atraso:.25s">
+          <div class="player-barra__ctrl">
+            <button type="button" class="player-barra__btn" data-anterior aria-label="Vídeo anterior"><i data-i="rewind" data-w="fill"></i></button>
+            <button type="button" class="player-barra__btn player-barra__btn--play" data-tocar-atual aria-label="Assistir com som"><i data-i="play" data-w="fill" class="i-play"></i><i data-i="pause" data-w="fill" class="i-pausa"></i></button>
+            <button type="button" class="player-barra__btn" data-proximo aria-label="Próximo vídeo"><i data-i="fast-forward" data-w="fill"></i></button>
+          </div>
+          <div class="player-barra__faixa">
+            <img class="player-barra__capa" loading="lazy" src="/assets/video/rebola-capa.jpg" width="540" height="960" alt="">
+            <span class="player-barra__nomes"><strong data-barra-titulo>Rebola Vai Malandra</strong><span data-barra-estado>Prévia · aperte o play pra ouvir</span></span>
+            <span class="player-barra__progresso" data-barra-tempo><span data-progresso></span></span>
+          </div>
+          <div class="player-barra__ctrl player-barra__ctrl--dir">
+            <button type="button" class="player-barra__btn" data-som aria-label="Ligar o som"><i data-i="speaker-slash" data-w="fill" class="i-mudo"></i><i data-i="speaker-high" data-w="fill" class="i-som"></i></button>
+            <input class="player-barra__volume" type="range" min="0" max="1" step="0.02" value="1" aria-label="Volume" data-volume style="--v:1">
+            <button type="button" class="player-barra__btn" data-tela-cheia aria-label="Assistir em tela cheia"><i data-i="corners-out" data-w="bold"></i></button>
+          </div>
+        </div>
+      </div>
+    </section>

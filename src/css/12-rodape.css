@@ -1,0 +1,18 @@
+/* ---------------------------------------------------------------- rodapé */
+.rodape { padding: 40px 0 30px; border-top: 1px solid var(--linha); background: var(--noite); }
+.rodape__linha { display: flex; align-items: center; justify-content: space-between; gap: 32px; padding-bottom: 28px; border-bottom: 1px solid var(--linha); }
+.rodape__marca img { width: 92px; height: auto; }
+.rodape__menu { display: flex; gap: 34px; }
+.rodape__menu a { font-size: 15px; color: var(--texto); transition: color .3s var(--ease-hover); }
+.rodape__menu a:hover { color: #fff; }
+.rodape__redes { display: flex; gap: 10px; }
+.rodape__redes a { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--linha-2); background: rgb(255 255 255 / .03); font-size: 19px; transition: background-color .3s var(--ease-hover), border-color .3s, transform .4s var(--ease); }
+.rodape__redes a:hover { background: var(--magenta); border-color: transparent; transform: translateY(-2px); }
+.rodape__fim { display: flex; justify-content: space-between; gap: 16px; padding-top: 22px; font-size: 13.5px; color: var(--texto-2); }
+.rodape__fim a { color: var(--texto); text-decoration: underline; text-decoration-color: rgb(255 255 255 / .25); text-underline-offset: 3px; }
+.rodape__fim a:hover { color: #fff; }
+@media (max-width: 61.99em) {
+  .rodape__linha { flex-direction: column; gap: 24PX; }
+  .rodape__menu { flex-wrap: wrap; justify-content: center; gap: 12PX 22PX; }
+  .rodape__fim { flex-direction: column; align-items: center; text-align: center; gap: 6PX; }
+}

@@ -1,0 +1,27 @@
+/* ---------------------------------------------------------------- flutuante */
+/* botão flutuante do WhatsApp: só aparece depois do hero */
+.flutuante {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  font-size: 27px;
+  color: #fff;
+  border: 1px solid rgb(255 160 205 / .45);
+  background: linear-gradient(180deg, rgb(240 60 150 / .92), rgb(196 22 108 / .92));
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / .38), 0 14px 30px -10px rgb(231 34 132 / .6);
+  opacity: 0;
+  transform: translateY(16px) scale(.9);
+  pointer-events: none;
+  transition: opacity .5s var(--ease), transform .5s var(--ease);
+}
+.flutuante--on { opacity: 1; transform: none; pointer-events: auto; }
+.flutuante:hover { transform: scale(1.06); }
+@media (max-width: 47.99em) {
+  .flutuante { right: 16PX; bottom: 16PX; width: 54PX; height: 54PX; }
+}

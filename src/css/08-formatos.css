@@ -1,0 +1,82 @@
+/* ---------------------------------------------------------------- formatos de show
+   Modelo aprovado na v3 do mockup (memória cards-leves-desfoque): cartão 3:5, a foto em cima
+   dissolvendo num vidro fosco na cor da própria foto com o tom da marca, só o nome e um botão
+   pílula leve. O vidro é uma 2ª imagem já borrada e tingida no build, revelada por máscara
+   parada: nada de backdrop-filter em seis cartões.                                           */
+.formatos__grade { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px 32px; }
+.fcard {
+  position: relative;
+  aspect-ratio: 3 / 4.2;
+  border-radius: 32px;
+  overflow: hidden;
+  background: var(--tom, var(--magenta));
+  isolation: isolate;
+  box-shadow: 0 30px 60px -36px rgb(0 0 0 / .9);
+  transition: transform .7s var(--ease), box-shadow .7s var(--ease);
+}
+.fcard picture { position: absolute; inset: 0; }
+.fcard__foto, .fcard__vidro { width: 100%; height: 100%; object-fit: cover; }
+.fcard__foto { transition: transform 1.4s var(--ease); }
+.fcard picture:nth-of-type(2) {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 30%, rgb(0 0 0 / .55) 52%, #000 70%);
+  mask-image: linear-gradient(to bottom, transparent 30%, rgb(0 0 0 / .55) 52%, #000 70%);
+}
+.fcard::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgb(255 255 255 / .16);
+  background: linear-gradient(to bottom, rgb(255 255 255 / 0) 55%, rgb(255 255 255 / .06));
+  pointer-events: none;
+}
+.fcard:hover { transform: translateY(-6px); box-shadow: 0 40px 70px -36px color-mix(in srgb, var(--tom) 70%, transparent); }
+.fcard:hover .fcard__foto { transform: scale(1.05); }
+.fcard__base {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 22px;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  gap: 16px;
+  text-align: center;
+}
+.fcard__titulo {
+  font-size: 21px;
+  line-height: 1.08;
+  text-transform: uppercase;
+  text-shadow: 0 2px 18px rgb(0 0 0 / .25);
+}
+.fcard__botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 100%;
+  min-height: 46px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  border: 1px solid rgb(255 255 255 / .34);
+  background: rgb(255 255 255 / .16);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / .35);
+  transition: background-color .35s var(--ease-hover), color .35s var(--ease-hover);
+}
+.fcard__botao .i { font-size: 17px; }
+.fcard__botao:hover { background: #fff; color: #18121D; }
+@media (max-width: 61.99em) {
+  .formatos__grade { grid-template-columns: 1fr 1fr; gap: 20PX; }
+}
+@media (max-width: 47.99em) {
+  /* dois por linha, rolando pra baixo (2, 2, 2) */
+  .formatos__grade { grid-template-columns: 1fr 1fr; gap: 10PX; }
+  .fcard { border-radius: 20PX; }
+  .fcard__base { left: 10PX; right: 10PX; bottom: 12PX; gap: 10PX; }
+  .fcard__titulo { font-size: 13.5PX; }
+  .fcard__botao { min-height: 38PX; font-size: 13PX; gap: 7PX; }
+  .fcard__botao .i { font-size: 15PX; }
+  .fcard__botao-mais { display: none; }
+}

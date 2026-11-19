@@ -1,0 +1,49 @@
+    <section class="secao musica" id="musica" aria-labelledby="musica-titulo">
+      <div class="caixa">
+        <header class="cabeca">
+          <span class="rotulo" data-revela>04 / Música</span>
+          <h2 class="titulo" id="musica-titulo" data-palavras data-revela="palavras">Do estúdio pra <span class="tarja m">pista.</span></h2>
+          <p class="cabeca__sub" data-revela style="--atraso:.2s">As versões que tocam no show nascem aqui.</p>
+        </header>
+        <div class="musica__grade">
+          <article class="mcard" data-revela="grade" style="--i:0" data-faixa>
+            <img class="mcard__foto" data-img="musica-novidade" sizes="(max-width: 47.99em) 50vw, 400px" alt="" loading="lazy">
+            <div class="mcard__topo">
+              <h3 class="mcard__titulo"><span>Novidade na Área</span>x Gol Bolinha</h3>
+              <span class="pilula">Versão Sky</span>
+            </div>
+            <svg class="mcard__onda" viewBox="0 0 400 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 C 40 6, 70 6, 100 30 S 160 54, 200 30 S 260 6, 300 30 S 360 54, 400 30"/></svg>
+            <div class="mcard__base">
+              <p><strong>Produção Sky</strong><span class="mcard__desc"> · Ouça a versão que toca no show</span></p>
+              <button type="button" class="redondo redondo--magenta mcard__play" data-tocar aria-label="Ouvir Novidade na Área x Gol Bolinha"><i data-i="play" data-w="fill" class="i-play"></i><i data-i="pause" data-w="fill" class="i-pausa"></i></button>
+            </div>
+            <span class="mcard__barra" aria-hidden="true"><span data-andamento></span></span>
+            <audio preload="none" src="/assets/audio/novidade-na-area.m4a"></audio>
+          </article>
+          <article class="mcard" data-revela="grade" style="--i:1">
+            <img class="mcard__foto" data-img="musica-rebola" sizes="(max-width: 47.99em) 50vw, 400px" alt="" loading="lazy">
+            <div class="mcard__topo">
+              <h3 class="mcard__titulo"><span>Rebola Vai</span>Malandra</h3>
+              <span class="pilula">Clipe oficial</span>
+            </div>
+            <div class="mcard__base">
+              <p><strong>Clipe</strong><span class="mcard__desc"> · Gravado no alto de uma cobertura, à noite</span></p>
+              <button type="button" class="redondo redondo--magenta mcard__play" data-ver-clipe="rebola" aria-label="Assistir ao clipe Rebola Vai Malandra"><i data-i="play" data-w="fill"></i></button>
+            </div>
+          </article>
+          <div class="lancamentos" data-revela="grade" style="--i:2">
+            <h3 class="rotulo">Lançamentos</h3>
+            <ol class="lancamentos__lista">
+              <li><a href="{{cfg.redes.spotify}}" target="_blank" rel="noopener"><span class="lancamentos__n">01</span><span class="lancamentos__nome"><strong>Funk 2023</strong>Sky</span><span class="lancamentos__play"><i data-i="play" data-w="fill"></i></span></a></li>
+              <li><a href="{{cfg.redes.spotify}}" target="_blank" rel="noopener"><span class="lancamentos__n">02</span><span class="lancamentos__nome"><strong>Pernoite</strong>Sky, Lee Magnatta</span><span class="lancamentos__play"><i data-i="play" data-w="fill"></i></span></a></li>
+              <li><a href="{{cfg.redes.spotify}}" target="_blank" rel="noopener"><span class="lancamentos__n">03</span><span class="lancamentos__nome"><strong>A Primeira Vez</strong>Sky</span><span class="lancamentos__play"><i data-i="play" data-w="fill"></i></span></a></li>
+            </ol>
+            <div class="lancamentos__redes">
+              <a class="pilula" href="{{cfg.redes.spotify}}" target="_blank" rel="noopener"><i data-i="spotify-logo" data-w="fill"></i>Spotify</a>
+              <a class="pilula" href="{{cfg.redes.youtube}}" target="_blank" rel="noopener"><i data-i="youtube-logo" data-w="fill"></i>YouTube</a>
+              <a class="pilula" href="{{cfg.redes.soundcloud}}" target="_blank" rel="noopener"><i data-i="soundcloud-logo" data-w="fill"></i>SoundCloud</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>

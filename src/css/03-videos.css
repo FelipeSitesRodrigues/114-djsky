@@ -1,0 +1,190 @@
+/* ---------------------------------------------------------------- vídeos (a seção principal)
+   Carrossel com o card do centro na frente e os vizinhos recuados em perspectiva (referência
+   do Spotify). A posição de cada card sai de --o (distância até o centro, de -2 a 2) e --a
+   (a mesma distância sem sinal), que o JS troca; a transição anda só em transform e opacity.
+   A prévia muda só carrega e toca no card do centro.                                         */
+.videos { overflow: clip; padding-bottom: 72px; }
+.videos::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(1100px, 90vw);
+  height: 560px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(closest-side, rgb(91 56 150 / .42), rgb(231 34 132 / .08) 60%, transparent);
+  pointer-events: none;
+}
+.videos .caixa { z-index: 1; }
+.carrossel { position: relative; height: 524px; perspective: 1400px; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.carrossel__trilho { position: absolute; inset: 0; transform-style: preserve-3d; }
+.vcard {
+  --o: 0;
+  --a: 0;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 292px;
+  aspect-ratio: 9 / 16;
+  margin-left: -146px;
+  border-radius: 26px;
+  overflow: hidden;
+  background: var(--card);
+  border: 1px solid rgb(255 255 255 / .12);
+  box-shadow: 0 30px 60px -30px rgb(0 0 0 / .8);
+  --s: 0;
+  transform: translate3d(calc(var(--o) * 238px + var(--s) * var(--extra, 0px)), calc(var(--a) * 34px), calc(var(--a) * -160px)) rotateY(calc(var(--o) * -14deg)) scale(calc(1 - var(--a) * .06));
+  opacity: calc(1 - var(--a) * .26);
+  z-index: calc(10 - var(--a));
+  transition: transform .9s var(--ease), opacity .9s var(--ease), border-color .5s var(--ease), box-shadow .5s var(--ease), width .7s var(--ease), height .7s var(--ease), margin .7s var(--ease), top .7s var(--ease);
+  cursor: pointer;
+}
+.vcard.ativo { border-color: rgb(255 140 200 / .5); box-shadow: 0 0 0 1px rgb(231 34 132 / .25), 0 30px 80px -24px rgb(231 34 132 / .45); }
+.vcard__loop { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.vcard::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgb(8 7 11 / .92) 0%, rgb(8 7 11 / .3) 34%, rgb(8 7 11 / 0) 55%);
+  pointer-events: none;
+}
+.vcard__tempo { position: absolute; top: 14px; left: 14px; z-index: 2; min-height: 28px; padding: 0 12px; font-size: 11px; letter-spacing: .06em; }
+.vcard__alvo { position: absolute; inset: 0; z-index: 2; display: grid; place-items: center; }
+.vcard__play { width: 70px; height: 70px; font-size: 24px; opacity: 0; transform: scale(.8); transition: opacity .5s var(--ease), transform .5s var(--ease); }
+.vcard.ativo .vcard__play { opacity: 1; transform: none; }
+.vcard.ativo .vcard__alvo:hover .vcard__play { transform: scale(1.08); }
+.vcard__base { position: absolute; left: 22px; right: 22px; bottom: 22px; z-index: 2; display: grid; gap: 6px; pointer-events: none; }
+.vcard__base strong { font-family: var(--fonte-display); font-stretch: 125%; font-weight: 800; font-size: 21px; line-height: 1.05; text-transform: uppercase; }
+.vcard__base span { font-family: var(--fonte-display); font-stretch: 112%; font-weight: 600; font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--texto); }
+
+/* barra de player de vidro */
+.player-barra {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 24px;
+  width: min(860px, 100%);
+  margin: 34px auto 0;
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: 1px solid rgb(255 255 255 / .14);
+  background: linear-gradient(180deg, rgb(255 255 255 / .07), rgb(255 255 255 / .03));
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / .14), 0 24px 50px -30px rgb(0 0 0 / .8);
+}
+.player-barra__ctrl { display: flex; align-items: center; gap: 6px; }
+.player-barra__ctrl:first-child { padding-right: 22px; border-right: 1px solid var(--linha-2); }
+.player-barra__ctrl--dir { padding-left: 22px; border-left: 1px solid var(--linha-2); }
+.player-barra__btn { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; font-size: 20px; color: #fff; transition: background-color .3s var(--ease-hover), transform .3s var(--ease); }
+.player-barra__btn:hover { background: rgb(255 255 255 / .08); }
+.player-barra__btn:active { transform: scale(.92); }
+.player-barra__faixa { display: grid; grid-template-columns: 52px 1fr; column-gap: 16px; align-items: center; text-align: left; min-width: 0; }
+.player-barra__capa { grid-row: 1 / 3; width: 52px; height: 52px; border-radius: 10px; object-fit: cover; border: 1px solid rgb(255 255 255 / .14); }
+.player-barra__nomes { display: grid; line-height: 1.25; min-width: 0; }
+.player-barra__nomes strong { font-weight: 600; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.player-barra__nomes span { font-size: 13px; color: var(--texto-2); }
+.player-barra__progresso { height: 3px; margin-top: 8px; border-radius: 3px; background: rgb(255 255 255 / .16); overflow: hidden; }
+.player-barra__progresso span { display: block; height: 100%; width: 100%; background: var(--magenta); transform-origin: left; transform: scaleX(0); }
+.carrossel__pontos { display: flex; justify-content: center; gap: 4px; margin-top: 20px; }
+.carrossel__pontos button { position: relative; width: 24px; height: 24px; }
+.carrossel__pontos button::before { content: ''; position: absolute; left: 8px; top: 8px; width: 8px; height: 8px; border-radius: 50%; background: rgb(255 255 255 / .28); transition: background-color .4s var(--ease), transform .4s var(--ease); }
+.carrossel__pontos button[aria-selected="true"]::before { background: var(--magenta); transform: scale(1.3); }
+
+/* ---------------------------------------------------------------- tocando no card
+   O play troca o trecho pelo vídeo inteiro com som no próprio card. Vídeo deitado (clipe, 15
+   anos) abre o card na horizontal.                                                          */
+.vcard.inteiro .vcard__loop { object-fit: cover; }
+/* vídeo deitado tocando: o card do centro abre na horizontal (16:9) e os vizinhos se afastam */
+.carrossel--largo { --extra: 300px; }
+.vcard--deitado.inteiro { width: 760px; height: 428px; aspect-ratio: auto; margin-left: -380px; top: 46px; }
+.vcard--deitado.inteiro .vcard__loop { object-fit: cover; background: #000; }
+.vcard.inteiro::after { opacity: .55; transition: opacity .6s var(--ease); }
+.vcard.tocando::after { opacity: 0; }
+.vcard.tocando .vcard__base, .vcard.tocando .vcard__tempo { opacity: 0; transform: translateY(8px); }
+.vcard__base, .vcard__tempo { transition: opacity .5s var(--ease), transform .5s var(--ease); }
+.vcard__play .i-pausa, .vcard.tocando .vcard__play .i-play { display: none; }
+.vcard.tocando .vcard__play .i-pausa { display: block; }
+.vcard__play > span { display: grid; place-items: center; }
+/* tocando, o botão some e só volta com o mouse em cima (ou no toque, que pausa) */
+.vcard.tocando .vcard__play { opacity: 0; transform: scale(.9); }
+.vcard.tocando .vcard__alvo:hover .vcard__play, .vcard.tocando .vcard__alvo:focus-visible .vcard__play { opacity: 1; transform: none; }
+.vcard.ativo.inteiro { border-color: rgb(255 140 200 / .75); }
+
+/* setas grandes de vidro, nas laterais do carrossel */
+.carrossel__seta {
+  position: absolute;
+  top: 50%;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  margin-top: -30px;
+  border-radius: 50%;
+  font-size: 22px;
+  color: #fff;
+  border: 1px solid rgb(255 255 255 / .22);
+  background: rgb(18 16 23 / .55);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / .2), 0 14px 30px -14px rgb(0 0 0 / .8);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition: transform .4s var(--ease), background-color .3s var(--ease-hover), border-color .3s var(--ease-hover);
+}
+.carrossel__seta--esq { left: 0; }
+.carrossel__seta--dir { right: 0; }
+.carrossel__seta:hover { background: var(--magenta); border-color: transparent; transform: scale(1.06); }
+.carrossel__seta:active { transform: scale(.94); }
+
+/* barra: play/pausa e som */
+.player-barra__btn--play { width: 50px; height: 50px; background: linear-gradient(180deg, rgb(240 60 150 / .9), rgb(196 22 108 / .9)); border: 1px solid rgb(255 160 205 / .45); box-shadow: inset 0 1px 0 rgb(255 255 255 / .35); }
+.player-barra__btn--play:hover { background: linear-gradient(180deg, rgb(248 84 166 / .95), rgb(210 30 120 / .95)); }
+.player-barra__btn--play .i-pausa, .player-barra__btn--play.tocando .i-play { display: none; }
+.player-barra__btn--play.tocando .i-pausa { display: block; }
+[data-som] .i-som, [data-som].com-som .i-mudo { display: none; }
+[data-som].com-som .i-som { display: block; }
+.player-barra__faixa { cursor: default; }
+.player-barra__progresso { cursor: pointer; padding-block: 6px; margin-block: 2px -6px; background-clip: content-box; height: 15px; }
+.player-barra__progresso span { border-radius: 3px; }
+@media (max-width: 47.99em) {
+  .carrossel__seta { width: 46px; height: 46px; margin-top: -23px; font-size: 18px; }
+  .carrossel__seta--esq { left: -6px; }
+  .carrossel__seta--dir { right: -6px; }
+}
+
+/* regulador de volume: trilho fino, parte cheia em magenta (--v de 0 a 1, o JS atualiza) */
+.player-barra__volume {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 92px;
+  height: 20px;
+  margin: 0 8px 0 2px;
+  background: transparent;
+  cursor: pointer;
+}
+.player-barra__volume::-webkit-slider-runnable-track { height: 4px; border-radius: 4px; background: linear-gradient(90deg, var(--magenta) calc(var(--v) * 100%), rgb(255 255 255 / .2) 0); }
+.player-barra__volume::-moz-range-track { height: 4px; border-radius: 4px; background: linear-gradient(90deg, var(--magenta) calc(var(--v) * 100%), rgb(255 255 255 / .2) 0); }
+.player-barra__volume::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; margin-top: -5px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 4px rgb(231 34 132 / .25); transition: transform .25s var(--ease); }
+.player-barra__volume::-moz-range-thumb { width: 14px; height: 14px; border: 0; border-radius: 50%; background: #fff; box-shadow: 0 0 0 4px rgb(231 34 132 / .25); }
+.player-barra__volume:hover::-webkit-slider-thumb { transform: scale(1.15); }
+
+@media (max-width: 61.99em) {
+  .carrossel { height: 460px; }
+  .carrossel--largo { --extra: 220px; }
+  .vcard--deitado.inteiro { width: min(640px, 100%); height: auto; aspect-ratio: 16 / 9; margin-left: calc(min(640px, 100%) / -2); top: 70px; }
+  .vcard { width: 250px; margin-left: -125px; transform: translate3d(calc(var(--o) * 180px), calc(var(--a) * 26px), calc(var(--a) * -140px)) rotateY(calc(var(--o) * -12deg)) scale(calc(1 - var(--a) * .06)); }
+}
+@media (max-width: 47.99em) {
+  .videos { padding-bottom: 56PX; }
+  .carrossel { height: 400PX; }
+  .carrossel--largo { --extra: 120PX; }
+  .vcard--deitado.inteiro { width: 100%; margin-left: -50%; top: 110PX; border-radius: 18PX; }
+  .vcard { width: 212PX; margin-left: -106PX; border-radius: 22PX; transform: translate3d(calc(var(--o) * 138PX), calc(var(--a) * 22PX), calc(var(--a) * -120PX)) rotateY(calc(var(--o) * -10deg)) scale(calc(1 - var(--a) * .08)); opacity: calc(1 - var(--a) * .4); }
+  .vcard__base strong { font-size: 17PX; }
+  .player-barra { grid-template-columns: 1fr auto; gap: 14PX; padding: 10PX 12PX 10PX 10PX; margin-top: 22PX; }
+  .player-barra__ctrl:first-child { order: 2; padding: 0; border: 0; }
+  .player-barra__ctrl:first-child [data-anterior], .player-barra__ctrl:first-child [data-proximo], .player-barra__ctrl--dir { display: none; }
+  .player-barra__faixa { grid-template-columns: 44PX 1fr; column-gap: 12PX; }
+  .player-barra__capa { width: 44PX; height: 44PX; }
+}
+@media (prefers-reduced-motion: reduce) { .vcard { transition: none; } }

@@ -1,0 +1,37 @@
+/* ---------------------------------------------------------------- galeria de shows
+   Faixa de ponta a ponta, as fotos na mesma altura (em pé 2:3, deitada 3:2). Anda por Web
+   Animations (09b-galeria.js) e não para: sem hover, sem toque, sem arrastar. As pontas somem
+   num degradê pro fundo. Sem JS ou com movimento reduzido, vira rolagem lateral parada.      */
+.galeria { position: relative; padding: 0; --alt: 420px; }
+.galeria__faixa {
+  overflow: clip;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+}
+.galeria__trilho { display: flex; width: max-content; will-change: transform; pointer-events: none; user-select: none; }
+.galeria__grupo { display: flex; flex: none; gap: 16px; padding-right: 16px; }
+.galeria__foto {
+  position: relative;
+  flex: none;
+  height: var(--alt);
+  aspect-ratio: 3 / 2;
+  border-radius: var(--raio);
+  overflow: hidden;
+  background: var(--card);
+  border: 1px solid rgb(255 255 255 / .07);
+}
+.galeria__foto--pe { aspect-ratio: 2 / 3; }
+.galeria__foto picture, .galeria__foto img { display: block; width: 100%; height: 100%; max-width: none; }
+.galeria__foto img { object-fit: cover; }
+/* sem animação: a cópia some e dá pra rolar de lado */
+html:not(.galeria-anda) .galeria__faixa { overflow-x: auto; scrollbar-width: none; }
+html:not(.galeria-anda) .galeria__grupo[aria-hidden] { display: none; }
+html:not(.galeria-anda) .galeria__trilho { pointer-events: auto; }
+@media (max-width: 63.99em) {
+  .galeria { --alt: 340PX; }
+}
+@media (max-width: 47.99em) {
+  .galeria { --alt: 255PX; }
+  .galeria__grupo { gap: 10PX; padding-right: 10PX; }
+  .galeria__foto { border-radius: 14PX; }
+}

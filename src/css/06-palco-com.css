@@ -1,0 +1,26 @@
+/* ---------------------------------------------------------------- dividiu o palco com
+   Duas fitas em sentidos opostos (a de baixo em contorno). Andam por Web Animations e aceleram
+   com a rolagem pelo playbackRate (memória marquee-waapi-rolagem).                           */
+.palcocom { position: relative; padding: 64px 0 70px; overflow: clip; border-top: 1px solid var(--linha); }
+.palcocom__rotulo { text-align: center; font-size: 12px; margin-bottom: 26px; }
+.fita { overflow: clip; }
+.fita + .fita { margin-top: 6px; }
+.fita__trilho { display: flex; width: max-content; will-change: transform; }
+.fita__grupo { display: flex; align-items: center; flex: none; }
+.fita span {
+  font-family: var(--fonte-display);
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: 50px;
+  line-height: 1.15;
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding-inline: 4px;
+}
+.fita--contorno span { color: transparent; -webkit-text-stroke: 1.2px rgb(245 243 247 / .7); }
+.fita__ast { font-style: normal; font-family: var(--fonte-display); font-weight: 800; font-size: 40px; color: var(--magenta); padding-inline: 22px; line-height: 1; transform: translateY(-.06em); }
+@media (max-width: 47.99em) {
+  .palcocom { padding: 46PX 0 50PX; }
+  .fita span { font-size: 30PX; }
+  .fita__ast { font-size: 24PX; padding-inline: 14PX; }
+}

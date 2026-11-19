@@ -1,0 +1,20 @@
+[
+  { "id": "rq10", "pe": true, "alt": "DJ Sky no palco com rastros de luz azul e laranja em volta" },
+  { "id": "rq26", "pe": false, "alt": "Telão de LED com uma moto vermelha com a marca sky atrás do DJ Sky na cabine" },
+  { "id": "rq15", "pe": true, "alt": "DJ Sky sorrindo de braços abertos atrás da mesa de som" },
+  { "id": "rq43", "pe": false, "alt": "Bailarinas dançando no palco sob luzes azuis no show do Sky" },
+  { "id": "rq23", "pe": true, "alt": "DJ Sky de óculos escuros comemorando diante do telão azul" },
+  { "id": "casino", "pe": false, "alt": "DJ Sky de costas com o braço erguido para a pista lotada, com faíscas dos dois lados" },
+  { "id": "rq13", "pe": true, "alt": "DJ Sky na mesa de som com anéis de luz girando em volta" },
+  { "id": "rq47", "pe": false, "alt": "Palco do festival com telões de LED azuis e o público na frente" },
+  { "id": "rq24", "pe": true, "alt": "DJ Sky com o braço levantado diante do telão claro" },
+  { "id": "rq30", "pe": false, "alt": "DJ Sky tocando com raios magenta no telão de LED" },
+  { "id": "rq21", "pe": true, "alt": "DJ Sky rindo de óculos escuros enquanto mexe na mesa" },
+  { "id": "bracos", "pe": false, "alt": "DJ Sky de braços abertos no palco diante da multidão" },
+  { "id": "rq14", "pe": true, "alt": "DJ Sky de perfil na cabine, com luz azul no rosto" },
+  { "id": "rq4", "pe": false, "alt": "DJ Sky dançando ao lado da mesa no palco escuro" },
+  { "id": "telao", "pe": false, "alt": "DJ Sky no palco com o logo sky no telão de LED" },
+  { "id": "rq2", "pe": true, "alt": "DJ Sky na cabine entre fachos de luz azul" },
+  { "id": "festival", "pe": false, "alt": "Festival à noite visto de cima, com o palco colorido e o público" },
+  { "id": "rq7", "pe": false, "alt": "DJ Sky tocando sob luz azul, olhando para a pista" }
+]

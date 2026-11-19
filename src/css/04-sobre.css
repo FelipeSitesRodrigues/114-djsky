@@ -1,0 +1,42 @@
+/* ---------------------------------------------------------------- sobre */
+.sobre__grade { display: grid; grid-template-columns: 1.12fr 1fr; gap: 64px; align-items: center; }
+.sobre__foto {
+  position: relative;
+  border-radius: var(--raio);
+  overflow: hidden;
+  border: 1px solid var(--linha-2);
+  aspect-ratio: 1 / 1.02;
+}
+.sobre__foto picture, .sobre__foto img { width: 100%; height: 100%; }
+.sobre__foto img { object-fit: cover; transform: scale(1.04); transition: transform 1.6s var(--ease); }
+.sobre__foto.visivel img { transform: none; }
+.sobre__foto::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgb(8 7 11 / .55), rgb(8 7 11 / 0) 36%); pointer-events: none; }
+.sobre__etiqueta { position: absolute; left: 22px; bottom: 22px; z-index: 1; }
+.sobre__texto { display: grid; justify-items: start; }
+.sobre__texto .rotulo { margin-bottom: 22px; }
+.sobre__logo { width: 210px; height: auto; margin-bottom: 18px; }
+.sobre__chamada {
+  font-family: var(--fonte-display);
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: 30px;
+  line-height: 1.04;
+  text-transform: uppercase;
+  color: var(--magenta);
+  margin-bottom: 22px;
+  max-width: 440px;
+}
+.sobre__texto p:not(.sobre__chamada) { color: var(--texto); font-size: 16.5px; max-width: 480px; }
+.sobre__texto p + p:not(.sobre__chamada) { margin-top: 14px; }
+.sobre__estados { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+.sobre__estados .pilula { min-width: 52px; justify-content: center; padding: 0 12px; letter-spacing: .1em; }
+.sobre__casa { border-color: rgb(255 120 190 / .7) !important; color: #fff; background: rgb(231 34 132 / .16) !important; }
+@media (max-width: 61.99em) {
+  .sobre__grade { grid-template-columns: 1fr; gap: 36PX; }
+  .sobre__foto { aspect-ratio: 4 / 3.6; }
+}
+@media (max-width: 47.99em) {
+  .sobre__logo { width: 150PX; }
+  .sobre__chamada { font-size: 23PX; }
+  .sobre__texto p:not(.sobre__chamada) { font-size: 15.5PX; }
+}

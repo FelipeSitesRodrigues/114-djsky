@@ -1,0 +1,47 @@
+/* ---------------------------------------------------------------- faixa de prova
+   Números em lima (o único lugar com a 2ª cor do logo). Número pequeno não conta: entra com
+   pulo de escala (skill animacoes-site).                                                     */
+.prova { position: relative; border-block: 1px solid var(--linha); background: var(--noite); }
+.prova__lista { display: grid; grid-template-columns: repeat(4, 1fr); }
+.prova__item {
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 8px;
+  padding: 30px 16px;
+  text-align: center;
+}
+.prova__item + .prova__item { border-left: 1px solid var(--linha); }
+.prova__num {
+  font-family: var(--fonte-display);
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: 42px;
+  line-height: 1;
+  color: var(--lima);
+  letter-spacing: -.01em;
+}
+.prova__num--texto { font-size: 28px; padding-block: 7px; text-transform: uppercase; }
+.prova__item span {
+  font-family: var(--fonte-display);
+  font-stretch: 112%;
+  font-weight: 600;
+  font-size: 11.5px;
+  letter-spacing: .16em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--texto-2);
+  max-width: 210px;
+}
+.js .prova__item.visivel .prova__num { animation: pulo .8s cubic-bezier(.34, 1.56, .64, 1) calc(var(--i) * 110ms + .25s) both; }
+@keyframes pulo { from { opacity: 0; transform: scale(.6); } }
+@media (max-width: 47.99em) {
+  .prova__lista { grid-template-columns: 1fr 1fr; }
+  .prova__item { padding: 24PX 10PX; }
+  .prova__item:nth-child(3) { border-left: 0; }
+  .prova__item:nth-child(n + 3) { border-top: 1px solid var(--linha); }
+  .prova__num { font-size: 34PX; }
+  .prova__num--texto { font-size: 19PX; padding-block: 8PX; }
+  .prova__item span { font-size: 10PX; letter-spacing: .12em; }
+}
+@media (prefers-reduced-motion: reduce) { .js .prova__item.visivel .prova__num { animation: none; } }

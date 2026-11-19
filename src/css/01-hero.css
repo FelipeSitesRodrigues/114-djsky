@@ -1,0 +1,195 @@
+/* ---------------------------------------------------------------- hero
+   Camadas (de trás pra frente): fundo de seda (ChatGPT), a mesma seda isolada respirando por
+   cima, halo violeta atrás da cabeça, "sky" gigante translúcido (PNG oficial), o Sky recortado
+   e o véu escuro que dá leitura ao texto. A seda e o halo andam só em transform e opacity,
+   num ciclo longo (pedido do Felipe: fundo mexendo devagar). O recorte do Sky é o LCP: entra
+   só com transform, nunca de opacidade zero (memória lcp-entrada-opacidade-zero).             */
+.hero {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  min-height: 640px;
+  overflow: clip;
+  isolation: isolate;
+  --mx: 0;
+  --my: 0;
+}
+.hero__cena, .hero__cena > * { position: absolute; inset: 0; }
+.hero__cena { z-index: -1; }
+.hero__cena picture { display: contents; }
+.hero__fundo, .hero__cena picture > .hero__fundo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+.hero__seda { inset: -5%; pointer-events: none; }
+.hero__seda img { width: 100%; height: 100%; object-fit: cover; }
+.js .hero__seda { opacity: 0; transition: opacity 2s var(--ease); animation: seda 16s ease-in-out infinite alternate; }
+.js .hero__seda.pronta { opacity: 1; }
+/* a seda anda, gira de leve e respira no brilho (dois ciclos com tempos diferentes, pra nunca
+   repetir igual) */
+@keyframes seda {
+  0% { transform: translate3d(0, 0, 0) scale(1) rotate(0); }
+  33% { transform: translate3d(-2.6%, -2.2%, 0) scale(1.07) rotate(-1.4deg); }
+  66% { transform: translate3d(1.8%, -3%, 0) scale(1.04) rotate(1deg); }
+  100% { transform: translate3d(2.6%, 1%, 0) scale(1.1) rotate(1.6deg); }
+}
+.js .hero__seda img { animation: seda-brilho 7s ease-in-out infinite alternate; }
+@keyframes seda-brilho { from { opacity: .62; } to { opacity: 1; } }
+
+/* dois focos de luz (magenta e violeta) cruzando o fundo devagar, como luz de palco */
+.hero__luz { inset: auto; width: 70vmax; height: 70vmax; border-radius: 50%; pointer-events: none; }
+.hero__luz--a { left: -24vmax; bottom: -38vmax; background: radial-gradient(closest-side, rgb(231 34 132 / .42), rgb(231 34 132 / .12) 50%, transparent); }
+.hero__luz--b { right: -26vmax; top: -30vmax; background: radial-gradient(closest-side, rgb(120 70 220 / .5), rgb(91 56 150 / .14) 50%, transparent); }
+.js .hero__luz--a { animation: luz-a 19s ease-in-out infinite alternate; }
+.js .hero__luz--b { animation: luz-b 23s ease-in-out infinite alternate; }
+@keyframes luz-a {
+  0% { transform: translate3d(0, 0, 0) scale(1); opacity: .7; }
+  50% { transform: translate3d(38vw, -8vh, 0) scale(1.15); opacity: 1; }
+  100% { transform: translate3d(62vw, 4vh, 0) scale(.92); opacity: .75; }
+}
+@keyframes luz-b {
+  0% { transform: translate3d(0, 0, 0) scale(1); opacity: .8; }
+  50% { transform: translate3d(-34vw, 12vh, 0) scale(1.12); opacity: 1; }
+  100% { transform: translate3d(-58vw, 26vh, 0) scale(.95); opacity: .7; }
+}
+
+
+.hero__halo {
+  inset: auto;
+  left: 50%;
+  top: 6%;
+  width: 62vmin;
+  height: 62vmin;
+  margin-left: -31vmin;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(150 70 230 / .55), rgb(110 40 190 / .22) 55%, transparent);
+  pointer-events: none;
+}
+.js .hero__halo { animation: halo 6s ease-in-out infinite alternate; }
+@keyframes halo { from { opacity: .45; transform: scale(.88); } to { opacity: 1; transform: scale(1.14); } }
+
+.hero__marca {
+  inset: auto;
+  left: 50%;
+  top: 10%;
+  width: min(80vw, 1180px);
+  transform: translate3d(calc(-50% + var(--mx) * -16px), calc(var(--my) * -10px), 0);
+  opacity: .11;
+  pointer-events: none;
+}
+.hero__marca canvas { display: block; width: 100%; height: auto; }
+.js .hero__marca canvas { opacity: 0; transform: scale(.94); transition: opacity 1.8s var(--ease), transform 1.8s var(--ease); }
+.js .hero__marca canvas.pronta { opacity: 1; transform: none; }
+
+
+.hero__sky {
+  inset: auto;
+  left: 50%;
+  bottom: 0;
+  height: 93%;
+  aspect-ratio: 2153 / 1436;
+  transform: translate3d(calc(-50% + var(--mx) * 8px), calc(var(--my) * 5px), 0);
+  -webkit-mask-image: linear-gradient(#000 58%, transparent 97%);
+  mask-image: linear-gradient(#000 58%, transparent 97%);
+  pointer-events: none;
+}
+.hero__sky picture, .hero__sky img { width: 100%; height: 100%; }
+.hero__sky img { object-fit: contain; object-position: 50% 100%; }
+
+.hero__veu {
+  background:
+    linear-gradient(to top, rgb(8 7 11 / .96) 0%, rgb(8 7 11 / .62) 24%, rgb(8 7 11 / 0) 52%),
+    linear-gradient(to bottom, rgb(8 7 11 / .55), rgb(8 7 11 / 0) 18%);
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------------- texto */
+.hero__texto {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 62px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-inline: 24px;
+}
+.hero__rotulo {
+  font-family: var(--fonte-display);
+  font-stretch: 125%;
+  font-weight: 600;
+  font-size: 12.5px;
+  letter-spacing: .44em;
+  text-transform: uppercase;
+  color: rgb(245 243 247 / .86);
+  margin-bottom: 16px;
+}
+.hero__titulo {
+  font-size: 88px;
+  line-height: .94;
+  letter-spacing: -.015em;
+  text-transform: uppercase;
+}
+.hero__titulo .so-cel { display: none; }
+.hero__sub { margin-top: 18px; font-size: 18px; color: rgb(245 243 247 / .82); max-width: 760px; }
+.hero__botoes { margin-top: 30px; justify-content: center; }
+
+/* informações soltas nas laterais, como nos pôsteres */
+.hero__lado {
+  position: absolute;
+  top: 47%;
+  z-index: 2;
+  font-family: var(--fonte-display);
+  font-stretch: 112%;
+  font-weight: 600;
+  font-size: 13.5px;
+  letter-spacing: .1em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+.hero__lado--esq { left: 64px; }
+.hero__lado--dir { right: 64px; min-height: 40px; padding: 0 22px; letter-spacing: .32em; background: rgb(130 104 201 / .1); }
+.hero__canto {
+  position: absolute;
+  bottom: 40px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--fonte-display);
+  font-stretch: 112%;
+  font-weight: 600;
+  font-size: 11.5px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: rgb(245 243 247 / .8);
+}
+.hero__canto--esq { left: 64px; }
+.hero__canto--dir { right: 64px; }
+.hero__canto--dir .i { font-size: 15px; animation: seta 2.2s var(--ease) infinite; }
+@keyframes seta { 50% { transform: translateY(4px); } }
+
+@media (max-width: 74.99em) {
+  .hero__titulo { font-size: clamp(54PX, 7.4vw, 82PX); }
+  .hero__lado, .hero__canto { display: none; }
+}
+@media (max-width: 47.99em) {
+  /* o Sky fica no alto, com altura própria, e o texto entra logo abaixo do rosto, sobre o
+     degradê preto (o texto absoluto subia por cima do rosto em tela baixa). O hero cresce se
+     a tela for curta, em vez de jogar o título no rosto */
+  .hero { --skyh: min(112vw, 58svh); height: auto; min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; padding-top: calc(56PX + var(--skyh) * .7); }
+  .hero__sky { top: 56PX; bottom: auto; height: var(--skyh); aspect-ratio: 1378 / 1436; -webkit-mask-image: linear-gradient(#000 55%, transparent 92%); mask-image: linear-gradient(#000 55%, transparent 92%); }
+  .hero__marca { top: 13%; width: 118vw; opacity: .12; }
+  .hero__halo { top: 10%; width: 90vw; height: 90vw; margin-left: -45vw; }
+  .hero__veu { background: linear-gradient(to top, rgb(8 7 11 / .98) 0%, rgb(8 7 11 / .92) 42%, rgb(8 7 11 / 0) 62%), linear-gradient(to bottom, rgb(8 7 11 / .6), rgb(8 7 11 / 0) 16%); }
+  .hero__texto { position: relative; bottom: auto; padding: 0 18PX 34PX; }
+  .hero__rotulo { font-size: 10PX; letter-spacing: .3em; margin-bottom: 12PX; }
+  .hero__titulo { font-size: clamp(36PX, 11.2vw, 50PX); }
+  .hero__titulo .so-cel { display: inline; }
+  .hero__titulo .so-desk { display: none; }
+  .hero__sub { font-size: 15PX; margin-top: 14PX; }
+  .hero__botoes { margin-top: 22PX; width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js .hero__seda, .js .hero__seda img, .js .hero__halo, .js .hero__luz, .hero__canto--dir .i { animation: none; }
+}

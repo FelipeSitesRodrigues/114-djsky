@@ -1,0 +1,108 @@
+/* ---------------------------------------------------------------- música
+   Cartões no modelo da referência de vidro: foto desfocada em movimento (feito no build, não
+   em filter), título em duas linhas (de cima apagada), etiqueta de vidro e play redondo.     */
+.musica { overflow: clip; }
+.musica::after {
+  content: '';
+  position: absolute;
+  left: 30%;
+  top: 55%;
+  width: 900px;
+  height: 500px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(closest-side, rgb(91 56 150 / .3), transparent);
+  pointer-events: none;
+}
+.musica .caixa { z-index: 1; }
+.musica__grade { display: grid; grid-template-columns: 1fr 1fr 1.08fr; gap: 20px; }
+.mcard {
+  position: relative;
+  min-height: 500px;
+  border-radius: var(--raio);
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / .14);
+  background: var(--card);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 26px;
+  isolation: isolate;
+}
+.mcard picture { position: absolute; inset: 0; z-index: -2; }
+.mcard__foto { width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s var(--ease); }
+.mcard:hover .mcard__foto { transform: scale(1.04); }
+.mcard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgb(8 7 11 / .55), rgb(8 7 11 / 0) 30%, rgb(8 7 11 / 0) 55%, rgb(8 7 11 / .82)), linear-gradient(160deg, rgb(231 34 132 / .22), rgb(91 56 150 / .18));
+}
+.mcard__topo { display: grid; justify-items: start; gap: 16px; }
+.mcard__titulo { font-family: var(--fonte-display); font-stretch: 112%; font-weight: 800; font-size: 30px; line-height: 1.05; }
+.mcard__titulo span { display: block; color: rgb(245 243 247 / .5); }
+.mcard__onda { position: absolute; left: 0; right: 0; top: 50%; height: 56px; width: 100%; overflow: visible; pointer-events: none; }
+.mcard__onda path { fill: none; stroke: var(--magenta-claro); stroke-width: 2.2; vector-effect: non-scaling-stroke; filter: drop-shadow(0 0 6px rgb(231 34 132 / .8)); }
+.mcard.tocando .mcard__onda { animation: onda 1.2s ease-in-out infinite alternate; }
+@keyframes onda { from { transform: scaleY(.55); } to { transform: scaleY(1.35); } }
+.mcard__base { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; }
+.mcard__base p { font-size: 14px; line-height: 1.45; color: var(--texto); max-width: 220px; }
+.mcard__base strong { color: #fff; font-weight: 600; }
+.mcard__play { width: 58px; height: 58px; flex: none; }
+.mcard__play .i-pausa, .mcard.tocando .mcard__play .i-play { display: none; }
+.mcard.tocando .mcard__play .i-pausa { display: block; }
+.mcard__barra { position: absolute; left: 26px; right: 26px; bottom: 12px; height: 2px; border-radius: 2px; background: rgb(255 255 255 / .12); overflow: hidden; opacity: 0; transition: opacity .4s var(--ease); }
+.mcard.tocando .mcard__barra, .mcard.pausada .mcard__barra { opacity: 1; }
+.mcard__barra span { display: block; height: 100%; background: var(--magenta); transform-origin: left; transform: scaleX(0); }
+
+.lancamentos {
+  display: flex;
+  flex-direction: column;
+  padding: 28px 28px 24px;
+  border-radius: var(--raio);
+  border: 1px solid rgb(255 255 255 / .14);
+  background: linear-gradient(180deg, rgb(255 255 255 / .05), rgb(255 255 255 / .02));
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / .1);
+}
+.lancamentos > .rotulo { margin-bottom: 18px; }
+.lancamentos__lista { flex: 1; }
+.lancamentos__lista a {
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  align-items: center;
+  gap: 8px;
+  padding: 18px 0;
+  border-top: 1px solid var(--linha-2);
+  transition: padding .4s var(--ease);
+}
+.lancamentos__lista li:last-child a { border-bottom: 1px solid var(--linha-2); }
+.lancamentos__lista a:hover { padding-left: 6px; }
+.lancamentos__n { font-family: var(--fonte-display); font-stretch: 125%; font-weight: 800; font-size: 17px; color: var(--lima); }
+.lancamentos__nome { display: grid; color: var(--texto-2); font-size: 14px; line-height: 1.35; }
+.lancamentos__nome strong { color: #fff; font-size: 18px; font-weight: 600; }
+.lancamentos__play { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgb(255 255 255 / .22); font-size: 15px; transition: background-color .3s var(--ease-hover), border-color .3s; }
+.lancamentos__lista a:hover .lancamentos__play { background: var(--magenta); border-color: transparent; }
+.lancamentos__redes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+.lancamentos__redes .pilula { letter-spacing: .04em; text-transform: none; font-size: 13px; min-height: 40px; transition: background-color .3s var(--ease-hover), border-color .3s; }
+.lancamentos__redes .pilula .i { font-size: 17px; }
+.lancamentos__redes .pilula:hover { background: rgb(255 255 255 / .1); border-color: rgb(255 255 255 / .3); }
+@media (max-width: 61.99em) {
+  .musica__grade { grid-template-columns: 1fr 1fr; }
+  .lancamentos { grid-column: span 2; }
+}
+@media (max-width: 47.99em) {
+  /* os dois cartões lado a lado e os lançamentos embaixo, na largura toda */
+  .musica__grade { grid-template-columns: 1fr 1fr; gap: 10PX; }
+  .lancamentos { grid-column: span 2; padding: 22PX 20PX; }
+  .mcard { min-height: 0; aspect-ratio: 3 / 5.4; padding: 16PX 14PX; border-radius: 20PX; }
+  .mcard__onda { top: 46%; }
+  .mcard__topo { gap: 10PX; }
+  .mcard__titulo { font-size: 17PX; }
+  .mcard .pilula { font-size: 9PX; min-height: 26PX; padding: 0 10PX; }
+  .mcard__base { flex-direction: column; align-items: flex-start; gap: 10PX; }
+  .mcard__base p { font-size: 13PX; line-height: 1.4; }
+  .mcard__desc { display: none; }
+  .mcard__play { width: 46PX; height: 46PX; }
+  .mcard__barra { left: 14PX; right: 14PX; bottom: 8PX; }
+}
+@media (prefers-reduced-motion: reduce) { .mcard.tocando .mcard__onda { animation: none; } }
