@@ -131,7 +131,8 @@ await variantes('palco-panorama', await origem(`${SHOW}/FGM-216.jpg`, { proporca
 }
 
 // ---------------------------------------------------------------- música (foto desfocada em movimento, como na referência)
-await variantes('musica-novidade', await origem(`${EST}/DSC01340.jpg`, { proporcao: 400 / 520, foco: 'north', movimento: 15, borrar: 1.2 }), [420, 800], { qualidade: 50 })
+// cartão da Chacoalha: capa do clipe Sky x Pré-Caju no YouTube (pedido do Sky, 2026-11-19), recortada em pé em volta dele
+await variantes('musica-chacoalha', await origem(`${REC}/PRE-CAJU/thumb-maxres.jpg`, { corte: [373 / 1280, 0, 554 / 1280, 1], proporcao: 400 / 520, movimento: 7, borrar: 0.5 }), [420, 554], { qualidade: 56 })
 await variantes('musica-rebola', await origem(`${MOCK}/secao-videos/4-capa-rebola-vai-malandra.jpg`, { proporcao: 400 / 520, movimento: 13, borrar: 1 }), [420, 800], { qualidade: 50 })
 
 // ---------------------------------------------------------------- formatos (cartão 3:5: foto e a versão em vidro, borrada e tingida)
