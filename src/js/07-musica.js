@@ -60,6 +60,8 @@
       const criadoCom = pendente
       api.createController(caixaSp.querySelector('[data-spotify-alvo]'), { uri: criadoCom, width: '100%', height: 80, theme: 'dark' }, (c) => {
         ctrl = c
+        // avisa o estado (o cartão da Chacoalha acende a onda e troca o ícone)
+        c.addListener('playback_update', (ev) => document.dispatchEvent(new CustomEvent('spotify-estado', { detail: ev.data })))
         let primeira = true
         c.addListener('ready', () => {
           if (!primeira) return
@@ -101,4 +103,22 @@
       }
     }),
   )
+})()
+
+;
+// Cartão grande da Chacoalha: o play aciona a mesma faixa nos lançamentos (Spotify, 1 clique) e
+// a onda acende enquanto ela toca.
+;(() => {
+  const card = document.querySelector('[data-faixa-spotify]')
+  if (!card) return
+  const id = card.dataset.faixaSpotify
+  const link = document.querySelector(`[data-spotify="${id}"]`)
+  const botao = card.querySelector('.mcard__play')
+  if (!link) return
+  botao.addEventListener('click', () => link.click())
+  document.addEventListener('spotify-estado', (e) => {
+    const toca = e.detail.playingURI === `spotify:track:${id}` && !e.detail.isPaused
+    card.classList.toggle('tocando', toca)
+    botao.setAttribute('aria-label', toca ? 'Pausar Chacoalha' : 'Ouvir Chacoalha')
+  })
 })()

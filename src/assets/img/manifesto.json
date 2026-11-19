@@ -836,43 +836,33 @@
  },
  "formato-formaturas-400.avif": {
   "w": 400,
-  "h": 666,
-  "kb": 16
+  "h": 667,
+  "kb": 10
  },
  "formato-formaturas-400.webp": {
   "w": 400,
-  "h": 666,
-  "kb": 24
- },
- "formato-formaturas-720.avif": {
-  "w": 720,
-  "h": 1200,
-  "kb": 32
- },
- "formato-formaturas-720.webp": {
-  "w": 720,
-  "h": 1200,
-  "kb": 44
+  "h": 667,
+  "kb": 12
  },
  "formato-formaturas-vidro-400.avif": {
   "w": 400,
-  "h": 666,
-  "kb": 3
+  "h": 667,
+  "kb": 1
  },
  "formato-formaturas-vidro-400.webp": {
   "w": 400,
-  "h": 666,
-  "kb": 6
+  "h": 667,
+  "kb": 2
  },
  "formato-formaturas-vidro-600.avif": {
   "w": 600,
   "h": 1000,
-  "kb": 4
+  "kb": 2
  },
  "formato-formaturas-vidro-600.webp": {
   "w": 600,
   "h": 1000,
-  "kb": 10
+  "kb": 4
  },
  "formato-quinze-400.avif": {
   "w": 400,
@@ -903,46 +893,6 @@
   "w": 600,
   "h": 1000,
   "kb": 5
- },
- "formato-reveillon-400.avif": {
-  "w": 400,
-  "h": 666,
-  "kb": 18
- },
- "formato-reveillon-400.webp": {
-  "w": 400,
-  "h": 666,
-  "kb": 48
- },
- "formato-reveillon-720.avif": {
-  "w": 720,
-  "h": 1200,
-  "kb": 38
- },
- "formato-reveillon-720.webp": {
-  "w": 720,
-  "h": 1200,
-  "kb": 130
- },
- "formato-reveillon-vidro-400.avif": {
-  "w": 400,
-  "h": 666,
-  "kb": 2
- },
- "formato-reveillon-vidro-400.webp": {
-  "w": 400,
-  "h": 666,
-  "kb": 3
- },
- "formato-reveillon-vidro-600.avif": {
-  "w": 600,
-  "h": 1000,
-  "kb": 3
- },
- "formato-reveillon-vidro-600.webp": {
-  "w": 600,
-  "h": 1000,
-  "kb": 6
  },
  "formato-corporativos-400.avif": {
   "w": 400,

@@ -13,15 +13,14 @@ mkdir -p "$O"
 # nome | arquivo | início do trecho (s) | filtro antes de tudo (opcional: o festival veio
 # gravado deitado e de ponta-cabeça, transpose=2 gira 90° pra esquerda)
 lista=(
- "reveillon|Videos_/Videos Sky Para Publicidade/Sky Reveillon 2022.mp4|14"
- "blackout|Videos_/Videos Sky Para Publicidade/After Movie Blackout.mp4|15"
  "rebola|Clipe de Musicas/REBOLA VAI MALANDRA.mov|96"
  "quinze-anos|Videos_/After Movie- 15 anos/sky - FESTA 15 ANOS HORIZONTAL.mp4|34"
- "formatura|Videos_/After Movie - Formatura_/IMG_5933.MOV|12"
+ "casamento-2|Videos_/After Movie - Formatura_/IMG_5933.MOV|12"   # a pasta diz formatura, mas é casamento (o Sky, 2026-11-19)
  "casamento|$D/casamento.mp4|8"
  "quinze-anos-2|$D/quinze-anos-2.mp4|26"
  "festival|$D/festival.mp4|50|transpose=2,"
  "grandes-eventos|$D/grandes-eventos.mp4|16"
+ "formatura|$D/formatura.mp4|40"
 )
 for item in "${lista[@]}"; do
   IFS='|' read -r nome arq ini giro <<< "$item"

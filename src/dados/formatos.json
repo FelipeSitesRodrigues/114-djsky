@@ -1,8 +1,7 @@
 [
-  { "id": "casas", "titulo": "Casas noturnas<br>e festivais", "msg": "*casa noturna ou festival*", "tom": "#E72284", "alt": "DJ Sky de costas no palco, apontando para o público de um festival" },
-  { "id": "casamentos", "titulo": "Casamentos", "msg": "um *casamento*", "tom": "#F05AA0", "alt": "Pista de festa de casamento à noite com guirlandas de luzes" },
-  { "id": "formaturas", "titulo": "Formaturas", "msg": "uma *formatura*", "tom": "#8268C9", "alt": "Formandos comemorando na festa de formatura" },
-  { "id": "quinze", "titulo": "15 anos", "msg": "uma *festa de 15 anos*", "tom": "#B81C68", "alt": "Convidadas dançando na festa de 15 anos" },
-  { "id": "reveillon", "titulo": "Réveillon", "msg": "*Réveillon ou data especial*", "tom": "#5B3896", "alt": "DJ Sky na cabine com o telão ao fundo" },
-  { "id": "corporativos", "titulo": "Corporativos", "msg": "um *evento corporativo*", "tom": "#7A4FC4", "alt": "Evento de empresa com palco e telão de LED violeta" }
+  {"id": "casas", "titulo": "Festivais", "msg": "um *festival*", "tom": "#E72284", "alt": "DJ Sky de costas no palco, apontando para o público de um festival"},
+  {"id": "casamentos", "titulo": "Casamentos", "msg": "um *casamento*", "tom": "#F05AA0", "alt": "Pista de festa de casamento à noite com guirlandas de luzes"},
+  {"id": "formaturas", "titulo": "Formaturas", "msg": "uma *formatura*", "tom": "#8268C9", "alt": "Formandas dançando de copo na mão na festa de formatura do Sky"},
+  {"id": "quinze", "titulo": "15 anos", "msg": "uma *festa de 15 anos*", "tom": "#B81C68", "alt": "Convidadas dançando na festa de 15 anos"},
+  {"id": "corporativos", "titulo": "Corporativos", "msg": "um *evento corporativo*", "tom": "#7A4FC4", "alt": "Evento de empresa com palco e telão de LED violeta"}
 ]

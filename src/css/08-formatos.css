@@ -3,7 +3,9 @@
    dissolvendo num vidro fosco na cor da própria foto com o tom da marca, só o nome e um botão
    pílula leve. O vidro é uma 2ª imagem já borrada e tingida no build, revelada por máscara
    parada: nada de backdrop-filter em seis cartões.                                           */
-.formatos__grade { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px 32px; }
+/* 5 cartões: flex centrado, a última linha fica no meio (3 + 2, e 2 + 2 + 1 no celular) */
+.formatos__grade { --col: 3; --gap: 32px; display: flex; flex-wrap: wrap; justify-content: center; gap: 28px var(--gap); }
+.formatos__grade > .fcard { flex: 0 0 calc((100% - var(--gap) * (var(--col) - 1)) / var(--col)); }
 .fcard {
   position: relative;
   aspect-ratio: 3 / 4.2;
@@ -68,11 +70,11 @@
 .fcard__botao .i { font-size: 17px; }
 .fcard__botao:hover { background: #fff; color: #18121D; }
 @media (max-width: 61.99em) {
-  .formatos__grade { grid-template-columns: 1fr 1fr; gap: 20PX; }
+  .formatos__grade { --col: 2; --gap: 20PX; row-gap: 20PX; }
 }
 @media (max-width: 47.99em) {
   /* dois por linha, rolando pra baixo (2, 2, 2) */
-  .formatos__grade { grid-template-columns: 1fr 1fr; gap: 10PX; }
+  .formatos__grade { --col: 2; --gap: 10PX; row-gap: 10PX; }
   .fcard { border-radius: 20PX; }
   .fcard__base { left: 10PX; right: 10PX; bottom: 12PX; gap: 10PX; }
   .fcard__titulo { font-size: 13.5PX; }

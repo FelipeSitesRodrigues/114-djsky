@@ -138,9 +138,9 @@ await variantes('musica-rebola', await origem(`${MOCK}/secao-videos/4-capa-rebol
 const formatos = [
   ['casas', `${SHOW}/TK1-6164.jpg`, '#E72284', 'centre'],
   ['casamentos', `${GPT}/5-casamentos.png`, '#F05AA0', 'centre'],
-  ['formaturas', `${MOCK}/secao-formatos/2-formaturas.jpg`, '#8268C9', 'centre'],
+  // quadro do aftermovie de formatura (Medicina) que o Sky mandou em 2026-11-19: a foto antiga parecia casamento
+  ['formaturas', `${REC}/VIDEOS DRIVE 2026-11-19/formatura-quadro.jpg`, '#8268C9', 'centre', [0.37, 0, 0.34, 1]],
   ['quinze', `${MOCK}/secao-formatos/3-festas-15-anos.jpg`, '#B81C68', 'centre', [0.49, 0, 0.34, 1]],
-  ['reveillon', `${MOCK}/secao-formatos/4-reveillon.jpg`, '#5B3896', 'centre'],
   ['corporativos', `${GPT}/6-corporativos.png`, '#7A4FC4', 'centre'],
 ]
 for (const [id, arq, tom, foco, corte] of formatos) {
